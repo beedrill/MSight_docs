@@ -9,3 +9,4 @@ MSight's Edge Device portion is designed to be running on a edge device, which i
    :maxdepth: 2
 
    install
+   usage
