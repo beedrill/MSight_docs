@@ -11,7 +11,7 @@ Welcome to MSight's documentation!
 
 MSight is an edge-cloud infrastructure data system built for roadside perception and cooperative driving. As one of the earliest such systems, MSight considers several important features.
 
-* MSight is fully containerize using `Docker <https://www.docker.com/>`_. Making it portable and easy to install, and migrate between systems and edge devices.
+* MSight is fully containerized using `Docker <https://www.docker.com/>`_. Making it portable and easy to install, and migrate between systems and edge devices.
 
 
 .. toctree::
@@ -22,10 +22,10 @@ MSight is an edge-cloud infrastructure data system built for roadside perception
    edge/index
    cloud/index
 
-Indices and tables
-==================
+.. Indices and tables
+.. ==================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`
 
