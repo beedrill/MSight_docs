@@ -15,3 +15,4 @@ MSight is based on `Robot Operation System 2 (ROS2) <https://docs.ros.org/en/hum
    install
    main_concepts
    usage
+   example
