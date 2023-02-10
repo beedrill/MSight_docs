@@ -18,7 +18,7 @@ There are different ways to organize and control these nodes, we conclude *three
 2. Oganize the nodes with a ROS2 launch script, and run all nodes in one container.
 
     In this case, all nodes will be running in a single docker container. The nodes will be handled by a ROS launch script. This is a typical way to run a ROS system, but it requires ROS expertise to organize these nodes using a ROS launch script.
-    Since all nodes are running in one Docker container, this method has less storage overhead.
+    Since all nodes are running in one Docker container, this method has less storage and, possibly, communication overhead.
 
 3. Oganize the nodes with a ROS2 launch script, and run directly on host machine
 
