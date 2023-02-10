@@ -11,7 +11,9 @@ Welcome to MSight's documentation!
 
 MSight is an edge-cloud infrastructure data system built for roadside perception and cooperative driving. As one of the earliest such systems, MSight considers several important features.
 
-* MSight is fully containerized using `Docker <https://www.docker.com/>`_. Making it portable and easy to install, and migrate between systems and edge devices.
+.. image:: ./system_architecture.png
+
+The above figure shows the main architecture of MSight. The system is composed of two parts: the edge part and the cloud part. The edge part is responsible for collecting data from the sensors, doing in-time processing and sending them to the cloud part. The cloud part is responsible for processing the data further. The edge part and the cloud part communicate with each other through a AWS Kinesis by default.
 
 
 .. toctree::
