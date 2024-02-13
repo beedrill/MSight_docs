@@ -6,9 +6,9 @@ The main idea of MSight edge library is to provide a set of executable **nodes**
 .. image:: figs/main_concepts.png
 
 In general, we offer three main types of nodes:
-    1. **Data sources**: These nodes are responsible for reading data from a source and providing it to the rest of the nodes. The data source is typically a sensor, but it can also be a file or a web service or others. The data source is responsible for providing the data in a format that can be understood by the rest of the nodes. MSight specifies a set of data types in the form of ROS interface that can be used to represent data.
-    2. **Data processors**: These nodes are responsible for processing the data provided by the data sources. The data processors can be used to perform filtering, segmentation, tracking, etc. The data processors are also responsible for providing the data in a format that can be understood by the rest of the nodes.
-    3. **Data sinks**: These nodes are responsible for receiving data from the data processors and performing some action with it. The data sinks can be used to display the data, save it to a file, send it to a web service, etc.
+    1. **Source Nodes**: These nodes are responsible for reading data from a source and providing it to the rest of the nodes. The data source is typically a sensor, but it can also be a file or a web service or others. The data source is responsible for providing the data in a format that can be understood by the rest of the nodes. 
+    2. **Data processing Nodes**: These nodes are responsible for processing the data provided by the data sources. The data processors can be used to perform filtering, segmentation, tracking, etc. The data processors are also responsible for providing the data in a format that can be understood by the rest of the nodes.
+    3. **Sink Nodes**: These nodes are responsible for receiving data from the data processors and performing some action with it. The data sinks can be used to display the data, save it to a file, send it to a web service, etc.
 
 Supported Nodes
 ----------------

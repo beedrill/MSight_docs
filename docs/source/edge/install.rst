@@ -1,21 +1,9 @@
 Installation
 ==============
 
-There are two ways of installing MSight, the local installation and the Docker installation.
+It is encouraged to use Docker to install MSight-edge system. The MSight-edge package is tightly coupled with Docker and one can use a single Docker-compose file
+to deploy the entire MSight-edge system. Of course, one can also install MSight-edge locally from source.
 
-Local Installation from source
-------------------------------
-
-MSight is based on `ROS2 Humble <https://docs.ros.org/en/humble/index.html>`_, therefore, for local installation, it is recommended to use `Ubuntu Jammy <https://releases.ubuntu.com/22.04/>`_ as the base system.
-
-To install ROS2, follow the `official documentation <https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html>`_
-
-After installation of ROS2,  you can compile and setup MSight edge with the following commands:
-
-.. code-block:: bash
-
-    colcon build
-    source install/local_setup.sh
 
 Use Docker image
 ----------------
@@ -39,4 +27,14 @@ Then you can use MSight within the Docker image. Or you can run your MSight code
 .. code-block:: bash
     
     docker run msight-img <your MSight code>
+
+
+Local Installation from source
+------------------------------
+
+To install MSight-edge from source, you can use the following commands:
+
+.. code-block:: bash
+
+    pip install . --user
 
