@@ -43,7 +43,7 @@ To make partition correct, select ``enable dynamic partition``, then enable ``Ne
 
 .. image:: figs/firehose_create_stream1.png
 
-You'll need to create ``year``, ``month``, ``day`` and ``hour`` field as the example shows, and add another ``info`` field as ``.info``:
+You'll need to create ``year``, ``month``, ``day`` and ``hour`` field as the example shows, and add another ``sensor_name`` field as ``.sensor_name``:
 
 .. note::
     for this task, you can expand the ``Example record``, it has the year, month, day and hour format as is.
@@ -54,6 +54,6 @@ Use `error/` as the error output prefix, and use the following as the bucket pre
 
 .. code-block::
 
-    !{partitionKeyFromQuery:info}/!{partitionKeyFromQuery:year}-!{partitionKeyFromQuery:month}-!{partitionKeyFromQuery:day}/!{partitionKeyFromQuery:hour}/
+    !{partitionKeyFromQuery:device_name}/!{partitionKeyFromQuery:sensor_name}/!{partitionKeyFromQuery:year}-!{partitionKeyFromQuery:month}-!{partitionKeyFromQuery:day}/!{partitionKeyFromQuery:hour}/
 
 Now, your cloud is setup to accomodate the data streamed from the edge device.
