@@ -10,6 +10,11 @@ In general, we offer three main types of nodes:
     2. **Data processing Nodes**: These nodes are responsible for processing the data provided by the data sources. The data processors can be used to perform filtering, segmentation, tracking, etc. The data processors are also responsible for providing the data in a format that can be understood by the rest of the nodes.
     3. **Sink Nodes**: These nodes are responsible for receiving data from the data processors and performing some action with it. The data sinks can be used to display the data, save it to a file, send it to a web service, etc.
 
+Data Types
+-----------
+The data produced and consumed by the nodes is represented using a set of data types. These data are classes that used to represent and store serializable data that then communicate between nodes via the pubsub system.
+Each data has a serialize and deserialize method that can be used to convert the data to and from a byte array. 
+
 Supported Nodes
 ----------------
 
