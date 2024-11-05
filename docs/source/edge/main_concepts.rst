@@ -1,93 +1,138 @@
 Main Concepts
 ================
 
-The main idea of MSight edge library is to provide a set of executable **nodes** that can be used to build a complete application. These nodes are designed to be as independent as possible, so that they can be used in different contexts. These nodes are also designed to be as generic as possible, so that they can be used in different applications. The following figure shows the main concepts of the library.
+The core idea behind the MSight edge library is to provide a suite of executable **nodes** that can be utilized to construct comprehensive applications. These nodes are designed to operate independently, enabling flexible use across various contexts and applications. This modular design allows for scalable and adaptable system development. The following figure illustrates the main concepts of the library:
 
 .. image:: figs/main_concepts.png
 
-In general, we offer three main types of nodes:
-    1. **Source Nodes**: These nodes are responsible for reading data from a source and providing it to the rest of the nodes. The data source is typically a sensor, but it can also be a file or a web service or others. The data source is responsible for providing the data in a format that can be understood by the rest of the nodes. 
-    2. **Data processing Nodes**: These nodes are responsible for processing the data provided by the data sources. The data processors can be used to perform filtering, segmentation, tracking, etc. The data processors are also responsible for providing the data in a format that can be understood by the rest of the nodes.
-    3. **Sink Nodes**: These nodes are responsible for receiving data from the data processors and performing some action with it. The data sinks can be used to display the data, save it to a file, send it to a web service, etc.
+### Node Types
+MSight offers three main types of nodes, each serving a distinct purpose in the data pipeline:
+
+1. **Source Nodes**: Responsible for acquiring data from sources such as sensors, files, or web services, and making it available to other nodes. These nodes ensure that the data is formatted in a way that is compatible with subsequent processing steps.
+2. **Data Processing Nodes**: Handle the processing of data received from source nodes, performing tasks such as filtering, segmentation, and tracking. These nodes also format the processed data so it can be utilized by subsequent nodes.
+3. **Sink Nodes**: Receive data from processing nodes and perform actions such as displaying, saving to a file, or transmitting to a web service.
 
 Data Types
------------
-The data produced and consumed by the nodes is represented using a set of data types. These data are classes that used to represent and store serializable data that then communicate between nodes via the pubsub system.
-Each data has a serialize and deserialize method that can be used to convert the data to and from a byte array. 
+------------
+
+The nodes in MSight exchange data using specific data types that ensure consistency and interoperability. These data types are represented as classes designed for serializability, facilitating communication between nodes through the pub/sub system. Each data type includes methods for serialization and deserialization to convert data to and from byte arrays. Below are some of the key data types provided by MSight:
+
+- **MSight SensorImage**: Represents an image captured by a sensor, stored as a NumPy array.
+- **MSight Road Object List**: Represents a list of detected road objects, typically used for perception and tracking tasks.
+- **MSight Bytes**: A flexible data type for storing byte arrays, allowing for any type of data.
+- **MSight PointCloud** (under development): Represents a point cloud captured by a sensor, stored as a NumPy array.
 
 Supported Nodes
 ----------------
 
-The following table shows the list of nodes that are currently supported by MSight.
+The following table lists the supported nodes in MSight, their descriptions, types, input/output data types, launch commands, and status. For more details about specific command-line arguments, use `--help`.
 
-.. list-table:: Table Supported Nodes
-   :widths: 15 40 10 10 10 15
-   :header-rows: 1
+.. list-table:: Supported Nodes
+   :widths: 10 20 10 10 10 10 10
+   :header-rows: 2
 
    * - Name
      - Description
-     - Node type
-     - Input data type
-     - Output data type
+     - Node Type
+     - Input Data Type
+     - Output Data Type
+     - Launch Command
      - Status
-   * - RTSP Sensor Handler
-     - This node is responsible for reading data from a RTSP stream and providing it to the rest of the nodes.
-     - Data source
+   * - RTSP
+     - Reads data from an RTSP stream and provides it to other nodes.
+     - Source
      - RTSP stream
      - MSight SensorImage
+     - `msight_launch_rtsp`
      - Stable
-   * - Bluecity Sensor Handler
-     - This node is responsible for reading data from a Bluecity edge device and providing it to the rest of the nodes.
-     - Data source
+   * - Local Image
+     - Reads data from files and publishes it, simulating a deployment sensor. Useful for debugging and testing.
+     - Source
+     - Local
+     - MSight SensorImage
+     - `msight_launch_local_image`
+     - Stable
+   * - Ouster
+     - Reads data from a Bluecity edge device and provides it to other nodes.
+     - Source
      - Frame from Bluecity API
      - MSight Road Object List
+     - `msight_launch_ouster`
      - Stable 
    * - Derq Sensor Handler
-     - This node is responsible for reading data from a Derq edge device and providing it to the rest of the nodes.
-     - Data source
+     - Reads data from a Derq edge device and publishes it.
+     - Source
      - Derq detection result (JSON) from UDP
      - MSight Road Object List
+     - N/A
      - Under development
-   * - SDSM Message Handler
-     - This node is responsible for receiving encoded SDSM message from UDP and decoding it to MSight Road Object List.
-     - Data source
+   * - SDSM Receiver
+     - Receives encoded SDSM messages from UDP and decodes them to MSight Road Object Lists.
+     - Source
      - SDSM message from UDP
      - MSight Road Object List
+     - `msight_launch_sdsm_receiver`
      - Under development
-   * - MSight detection node
-     - This node is responsible for detecting and tracking objects in the image and providing the results to the rest of the nodes.
-     - Data processor
+   * - MSight Detection Node
+     - Performs object detection and tracking on images.
+     - Data Processing
      - MSight SensorImage
      - MSight Road Object List
+     - `msight_launch_yolov8_detection`
      - Stable
-   * - MSight fusion node
-     - This node is responsible for fusing the results from different data processors and providing the results to the rest of the nodes.
-     - Data processor
+   * - MSight Geo Fusion Node
+     - Fuses outputs from different data processors.
+     - Data Processing
      - MSight Road Object List
      - MSight Road Object List
-     - Under development
-   * - AWS Kinesis uploader
-     - This node is responsible for uploading the results to AWS Kinesis.
-     - Data sink
-     - MSight Road Object List
-     - N/A
+     - `msight_launch_geo_fusion`
      - Stable
-   * - CSV file writer
-     - This node is responsible for writing the results to a CSV file.
-     - Data sink
+   * - MSight Tracking Node
+     - Tracks detected objects over time.
+     - Data Processing
+     - MSight Road Object List
+     - MSight Road Object List
+     - `msight_launch_tracking`
+     - Stable
+   * - SDSM Message Encoder
+     - Encodes results into SDSM message format.
+     - Data Processing
+     - MSight Road Object List
+     - MSight Bytes
+     - `msight_launch_sdsm_encoder`
+     - Stable
+   * - BSM Message Encoder
+     - Encodes results into BSM message format.
+     - Data Processing
      - MSight Road Object List
      - N/A
-     - Under development
-   * - SDSM message encoder and forwarder
-     - This node is responsible for encoding the results to SDSM message and sending it to UDP.
-     - Data sink
-     - MSight Road Object List
      - N/A
      - Under development
-   * - BSM message encoder and forwarder
-     - This node is responsible for encoding the results to BSM message and sending it to UDP.
-     - Data sink
+   * - IFM
+     - Sends IFM messages to RSU using the UDP protocol.
+     - Sink
+     - MSight Bytes
+     - N/A
+     - `msight_launch_ifm`
+     - Stable
+   * - AWS Kinesis Pusher
+     - Uploads results to AWS Kinesis.
+     - Sink
      - MSight Road Object List
      - N/A
+     - `msight_launch_kinesis_pusher`
+     - Stable
+   * - CSV File Writer
+     - Writes results to a CSV file.
+     - Sink
+     - MSight Road Object List
+     - N/A
+     - N/A
      - Under development
-
+   * - Image Viewer
+     - Displays images from sensors.
+     - Sink
+     - MSight SensorImage
+     - N/A
+     - `msight_launch_image_viewer`
+     - Stable
