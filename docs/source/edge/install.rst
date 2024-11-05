@@ -11,7 +11,7 @@ The local installation is bound tightly with the operation system and environmen
 
 .. code-block:: bash
     
-    docker pull msight/msight-edge
+    docker pull michigantrafficlab/msight-edge
 
 
 Build docker image from source
